@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ll.mapper.UserMapper">
+
+	<insert id="insert" parameterType="User" keyProperty="id"
+		useGeneratedKeys="true">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into user (name,sex) values(#{name},#{sex});
+	
+	</insert>
+
+	<delete id="delete" parameterType="Integer">
+		delete from user
+		where id=#{id}
+	</delete>
+
+	<select id="get" parameterType="Integer" resultType="User">
+		select * from
+		user where id= #{id}
+	</select>
+
+	<update id="update" parameterType="User">
+		update user set
+		name=#{name},sex=#{sex}
+		where id=#{id}
+	</update>
+
+	<select id="getlist" resultType="User">
+		select * from user
+	</select>
+
+</mapper>
